@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<EmployeeManagementSystem.Models.Employee>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    </div>
+<div>
+    <a asp-action="AddNewEmployee" asp-controller="Employee" class="btn btn-primary">Add New Employee</a>
+
+</div>
+<br />
+<div>
+    <table class="table" id="emplTbl">
+        <thead class="table-dark">
+            <tr>                
+                <th scope="col"> Name </th>
+                <th scope="col"> Date Of Birth </th>
+                <th scope="col"> Email </th>
+                <th scope="col"> Department </th>
+                <th scope="col"> Actions </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>                   
+                    <td>@emp.Name</td>
+                    <td>@emp.DOB</td>
+                    <td>@emp.Email</td>
+                    <td>@emp.Dept</td>
+                    <td>
+                       <span>
+                            <a class="btn btn-primary" asp-controller="Employee" asp-action="UpdateEmployee" asp-route-id="@emp.EmployeeId">EDIT</a>
+                       </span>  |
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span> Are you sure you want to delete?</span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                                        <a asp-controller="Employee" asp-action="DeleteEmployee" asp-route-id="@emp.EmployeeId" class="btn btn-danger">Yes</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                      
+                        <span id="delete_@emp.EmployeeId"><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</a></span>
+                    </td>
+
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Modal -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#emplTbl").DataTable();
+        
+    });
+</script>

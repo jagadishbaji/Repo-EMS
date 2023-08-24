@@ -1,0 +1,102 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model EmployeeManagementSystem.Models.Employee
+<div class="text-center">
+    <h1 class="4">Update Employee</h1>
+   
+
+</div>
+<br />
+<div>
+    <form asp-action="AddNewEmployee" asp-controller="Employee" method="post">
+        <div class="text-center">
+            <div class="col-md-12">
+                <input type="hidden" asp-for="EmployeeId" value="@Model.EmployeeId" />
+                <div class="row">
+                    <div class="col-sm-2">
+                        <lable>Name : </lable>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" asp-for="Name" type="text" id="txt_name" value="@Model.Name" required pattern="[a-zA-Z]*" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-2">
+                        <lable>Email : </lable>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" asp-for="Email" type="email" id="txt_email" value="@Model.Email" disabled />
+
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-2">
+                        <lable>Date Of Birth : </lable>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" asp-for="DOB" type="text" id="txt_dob" value="@Model.DOB" placeholder="Select Date" required />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-2">
+                        <lable>Department:</lable>
+                    </div>
+                    <div class="col-md-4">
+
+                        <select asp-for="Dept" class="form-control dropdown" value="@Model.Dept">                          
+                            <option value="IT">IT</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="HR">HR</option>
+                            <option value="Finance">Finance</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 row"><br /></div>
+            <div class="col-md-12 row">
+                <div class="col-md-2">
+                    <a class="btn btn-outline-primary" asp-action="Index" asp-controller="Employee">Back to List</a>
+                </div>
+                <div class="col-md-8">
+                    <button class="btn btn-outline-success" type="submit" asp-action="UpdateEmployee" asp-controller="Employee">Update</button>                   
+                </div>
+            </div>
+          
+
+        </div>
+        <div>
+            <span class="text-danger">@ViewData["Error"]</span>
+        </div>
+
+    </form>
+</div>
+@section Scripts
+    {
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#txt_dob").datepicker({
+                dateFormat: 'dd-mm-yy',
+                minDate: new Date(1980, 0, 1),
+                maxDate: new Date(2000, 11, 31),
+                changeMonth: true,
+                changeYear: true
+            });
+            
+        });
+    </script>
+}
+
